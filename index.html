@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FIKRI_CORE v4.0</title>
+<style>
+  body {
+    background: #000;
+    color: #ff0000;
+    font-family: 'Courier New', monospace;
+    padding: 20px;
+    overflow: hidden;
+    animation: glitch 0.3s infinite;
+  }
+  @keyframes glitch {
+    0% { text-shadow: 2px 0 red; }
+    50% { text-shadow: -2px 0 blue; }
+    100% { text-shadow: 2px 0 red; }
+  }
+.terminal {
+    white-space: pre-wrap;
+    font-size: 16px;
+  }
+.bar {
+    width: 300px;
+    height: 20px;
+    border: 1px solid #ff0000;
+    margin: 10px 0;
+  }
+.fill {
+    height: 100%;
+    background: #ff0000;
+    width: 0%;
+    animation: load 4s forwards;
+  }
+  @keyframes load {
+    to { width: 99%; }
+  }
+.final {
+    display: none;
+    animation: blink 0.5s step-start infinite;
+    font-size: 24px;
+    margin-top: 20px;
+  }
+  @keyframes blink { 50% { opacity: 0; } }
+</style>
+</head>
+<body>
+<audio id="alarm" loop>
+  <source src="https://www.soundjay.com/misc/sounds/bell-ringing-05.mp3" type="audio/mpeg">
+</audio>
+
+<div class="terminal" id="term"></div>
+
+<script>
+const alarm = document.getElementById('alarm');
+const term = document.getElementById('term');
+alarm.play().catch(()=>{}); // auto play suara alarm
+
+const lines = [
+  "> SYSTEM OVERRIDE: FIKRI_CORE ACTIVE",
+  "",
+  "> Mengunduh meme kucing... ",
+  '<div class="bar"><div class="fill"></div></div> 99% COMPLETE',
+  "",
+  "> Scanning galeri... DITEMUKAN: 5000 SS Wattpad",
+  "> Mencoba akses kontak... ERROR: CONTACTS NOT FOUND",
+  "> Alasan: Terlalu introvert untuk punya teman",
+  "",
+  "> ERROR: TARGET TERPRANK TOTAL ",
+  "> #SELAMAT UDAH KENA PRANK",
+  "> By; Fikri"
+];
+
+let i = 0;
+function typeLine() {
+  if (i < lines.length) {
+    term.innerHTML += lines[i] + "\n";
+    i++;
+    setTimeout(typeLine, 1200);
+  } else {
+    alarm.pause(); // matiin alarm di akhir
+  }
+}
+
+setTimeout(typeLine, 500);
+</script>
+</body>
+  </html>
